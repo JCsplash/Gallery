@@ -80,14 +80,14 @@ class PageIndicator: UIView {
   }
 
   func makeIndicator() -> UIImageView {
-    let imageView = UIImageView(image: GalleryBundle.image("gallery_page_indicator"))
+    let imageView = UIImageView(image: Bundle.image("gallery_page_indicator"))
 
     return imageView
   }
 
   // MARK: - Action
 
-  @objc func buttonTouched(_ button: UIButton) {
+  func buttonTouched(_ button: UIButton) {
     let index = buttons.index(of: button) ?? 0
     delegate?.pageIndicator(self, didSelect: index)
     select(index: index)
@@ -95,20 +95,19 @@ class PageIndicator: UIView {
 
   // MARK: - Logic
 
-  func select(index: Int, animated: Bool = true) {
+  func select(index: Int) {
     for (i, b) in buttons.enumerated() {
       b.titleLabel?.font = buttonFont(i == index)
     }
 
-    UIView.animate(withDuration: animated ? 0.25 : 0.0,
-                   delay: 0,
-                   usingSpringWithDamping: 0.7,
-                   initialSpringVelocity: 0.5,
-                   options: .beginFromCurrentState,
-                   animations: {
-                     self.indicator.center.x = self.buttons[index].center.x
-                   },
-                   completion: nil)
+    UIView.animate(withDuration: 0.25, delay: 0,
+                               usingSpringWithDamping: 0.7,
+                               initialSpringVelocity: 0.5,
+                               options: [],
+                               animations:
+      {
+        self.indicator.center.x = self.buttons[index].center.x
+      }, completion: nil)
   }
 
   // MARK: - Helper

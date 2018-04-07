@@ -11,8 +11,13 @@ public protocol GalleryControllerDelegate: class {
 
 public class GalleryController: UIViewController, PermissionControllerDelegate {
 
-  public weak var delegate: GalleryControllerDelegate?
+  lazy var imagesController: ImagesController = self.makeImagesController()
+  lazy var cameraController: CameraController = self.makeCameraController()
+  lazy var videosController: VideosController = self.makeVideosController()
 
+  lazy var pagesController: PagesController = self.makePagesController()
+  lazy var permissionController: PermissionController = self.makePermissionController()
+  public weak var delegate: GalleryControllerDelegate?
   public let cart = Cart()
 
   // MARK: - Init
@@ -32,16 +37,26 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
 
     setup()
 
-    if let pagesController = makePagesController() {
-      g_addChildController(pagesController)
+    if Permission.hasNeededPermissions {
+      showMain()
     } else {
-      let permissionController = makePermissionController()
-      g_addChildController(permissionController)
+      showPermissionView()
     }
   }
 
+
   public override var prefersStatusBarHidden : Bool {
     return true
+  }
+
+  // MARK: - Logic
+
+  func showMain() {
+    g_addChildController(pagesController)
+  }
+
+  func showPermissionView() {
+    g_addChildController(permissionController)
   }
 
   // MARK: - Child view controller
@@ -67,33 +82,30 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
     return controller
   }
 
-  func makePagesController() -> PagesController? {
-    guard Permission.Photos.status == .authorized else {
-      return nil
-    }
-
-    let useCamera = Permission.Camera.needsPermission && Permission.Camera.status == .authorized
-
-    let tabsToShow = Config.tabsToShow.flatMap { $0 != .cameraTab ? $0 : (useCamera ? $0 : nil) }
-
-    let controllers: [UIViewController] = tabsToShow.flatMap { tab in
+  func makePagesController() -> PagesController {
+    var controllers: [UIViewController] = []
+    for tab in Config.tabsToShow {
       if tab == .imageTab {
-        return makeImagesController()
+        controllers.append(imagesController)
       } else if tab == .cameraTab {
-        return makeCameraController()
+        controllers.append(cameraController)
       } else if tab == .videoTab {
-        return makeVideosController()
-      } else {
-        return nil
+        controllers.append(videosController)
       }
     }
-
-    guard !controllers.isEmpty else {
-      return nil
-    }
+    assert(!controllers.isEmpty, "Must specify at least one controller.")
 
     let controller = PagesController(controllers: controllers)
-    controller.selectedIndex = tabsToShow.index(of: Config.initialTab ?? .cameraTab) ?? 0
+    if let initialTab = Config.initialTab {
+      assert(Config.tabsToShow.index(of: initialTab) != nil, "Must specify an initial tab that is in Config.tabsToShow.")
+      controller.selectedIndex = Config.tabsToShow.index(of: initialTab)!
+    } else {
+      if let cameraIndex = Config.tabsToShow.index(of: .cameraTab) {
+        controller.selectedIndex = cameraIndex
+      } else {
+        controller.selectedIndex = 0
+      }
+    }
 
     return controller
   }
@@ -136,9 +148,7 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
   // MARK: - PermissionControllerDelegate
 
   func permissionControllerDidFinish(_ controller: PermissionController) {
-    if let pagesController = makePagesController() {
-      g_addChildController(pagesController)
-      controller.g_removeFromParentController()
-    }
+    showMain()
+    permissionController.g_removeFromParentController()
   }
 }

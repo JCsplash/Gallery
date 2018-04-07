@@ -1,13 +1,12 @@
 import UIKit
 import Photos
 
-public protocol CartDelegate: class {
+protocol CartDelegate: class {
   func cart(_ cart: Cart, didAdd image: Image, newlyTaken: Bool)
   func cart(_ cart: Cart, didRemove image: Image)
   func cartDidReload(_ cart: Cart)
 }
 
-/// Cart holds selected images and videos information
 public class Cart {
 
   public var images: [Image] = []
@@ -22,13 +21,13 @@ public class Cart {
 
   // MARK: - Delegate
 
-  public func add(delegate: CartDelegate) {
+  func add(delegate: CartDelegate) {
     delegates.add(delegate)
   }
 
   // MARK: - Logic
 
-  public func add(_ image: Image, newlyTaken: Bool = false) {
+  func add(_ image: Image, newlyTaken: Bool = false) {
     guard !images.contains(image) else { return }
 
     images.append(image)
@@ -38,7 +37,7 @@ public class Cart {
     }
   }
 
-  public func remove(_ image: Image) {
+  func remove(_ image: Image) {
     guard let index = images.index(of: image) else { return }
 
     images.remove(at: index)
@@ -48,7 +47,7 @@ public class Cart {
     }
   }
 
-  public func reload(_ images: [Image]) {
+  func reload(_ images: [Image]) {
     self.images = images
 
     for case let delegate as CartDelegate in delegates.allObjects {
@@ -58,7 +57,7 @@ public class Cart {
 
   // MARK: - Reset
 
-  public func reset() {
+  func reset() {
     video = nil
     images.removeAll()
     delegates.removeAllObjects()

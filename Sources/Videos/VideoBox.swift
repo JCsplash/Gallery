@@ -25,7 +25,7 @@ class VideoBox: UIView {
 
   // MARK: - Action
 
-  @objc func viewTapped(_ gr: UITapGestureRecognizer) {
+  func viewTapped(_ gr: UITapGestureRecognizer) {
     delegate?.videoBoxDidTap(self)
   }
 
@@ -59,7 +59,7 @@ class VideoBox: UIView {
 
   func makeCameraImageView() -> UIImageView {
     let imageView = UIImageView()
-    imageView.image = GalleryBundle.image("gallery_video_cell_camera")
+    imageView.image = Bundle.image("gallery_video_cell_camera")
 
     return imageView
   }

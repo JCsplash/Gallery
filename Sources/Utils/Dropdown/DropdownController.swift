@@ -20,9 +20,7 @@ class DropdownController: UIViewController {
     }
   }
 
-  var expandedTopConstraint: NSLayoutConstraint?
-  var collapsedTopConstraint: NSLayoutConstraint?
-
+  var topConstraint: NSLayoutConstraint?
   weak var delegate: DropdownControllerDelegate?
 
   // MARK: - Initialization
@@ -56,13 +54,7 @@ class DropdownController: UIViewController {
     animating = true
     expanding = !expanding
 
-    if expanding {
-      collapsedTopConstraint?.isActive = false
-      expandedTopConstraint?.isActive = true
-    } else {
-      expandedTopConstraint?.isActive = false
-      collapsedTopConstraint?.isActive = true
-    }
+    self.topConstraint?.constant = expanding ? 1 : view.bounds.size.height
 
     UIView.animate(withDuration: 0.25, delay: 0, options: UIViewAnimationOptions(), animations: {
       self.view.superview?.layoutIfNeeded()

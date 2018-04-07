@@ -42,17 +42,6 @@ class CameraController: UIViewController {
     locationManager?.stop()
   }
 
-  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-    coordinator.animate(alongsideTransition: { _ in
-      if let connection = self.cameraView.previewLayer?.connection,
-        connection.isVideoOrientationSupported {
-        connection.videoOrientation = Utils.videoOrientation()
-      }
-    }, completion: nil)
-
-    super.viewWillTransition(to: size, with: coordinator)
-  }
-
   // MARK: - Setup
 
   func setup() {
@@ -75,19 +64,19 @@ class CameraController: UIViewController {
 
   // MARK: - Action
 
-  @objc func closeButtonTouched(_ button: UIButton) {
+  func closeButtonTouched(_ button: UIButton) {
     EventHub.shared.close?()
   }
 
-  @objc func flashButtonTouched(_ button: UIButton) {
+  func flashButtonTouched(_ button: UIButton) {
     cameraView.flashButton.toggle()
 
-    if let flashMode = AVCaptureDevice.FlashMode(rawValue: cameraView.flashButton.selectedIndex) {
+    if let flashMode = AVCaptureFlashMode(rawValue: cameraView.flashButton.selectedIndex) {
       cameraMan.flash(flashMode)
     }
   }
 
-  @objc func rotateButtonTouched(_ button: UIButton) {
+  func rotateButtonTouched(_ button: UIButton) {
     UIView.animate(withDuration: 0.3, animations: {
       self.cameraView.rotateOverlayView.alpha = 1
     }, completion: { _ in
@@ -99,11 +88,11 @@ class CameraController: UIViewController {
     })
   }
 
-  @objc func stackViewTouched(_ stackView: StackView) {
+  func stackViewTouched(_ stackView: StackView) {
     EventHub.shared.stackViewTouched?()
   }
 
-  @objc func shutterButtonTouched(_ button: ShutterButton) {
+  func shutterButtonTouched(_ button: ShutterButton) {
     guard isBelowImageLimit() else { return }
     guard let previewLayer = cameraView.previewLayer else { return }
 
@@ -131,7 +120,7 @@ class CameraController: UIViewController {
     }
   }
 
-  @objc func doneButtonTouched(_ button: UIButton) {
+  func doneButtonTouched(_ button: UIButton) {
     EventHub.shared.doneWithImages?()
   }
     

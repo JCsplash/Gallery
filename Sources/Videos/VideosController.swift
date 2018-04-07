@@ -66,11 +66,11 @@ class VideosController: UIViewController {
 
   // MARK: - Action
 
-  @objc func closeButtonTouched(_ button: UIButton) {
+  func closeButtonTouched(_ button: UIButton) {
     EventHub.shared.close?()
   }
 
-  @objc func doneButtonTouched(_ button: UIButton) {
+  func doneButtonTouched(_ button: UIButton) {
     EventHub.shared.doneWithVideos?()
   }
 
@@ -124,7 +124,6 @@ extension VideosController: PageAware {
   func pageDidShow() {
     once.run {
       library.reload {
-        self.gridView.loadingIndicator.stopAnimating()
         self.items = self.library.items
         self.gridView.collectionView.reloadData()
         self.gridView.emptyView.isHidden = !self.items.isEmpty

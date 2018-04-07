@@ -64,6 +64,7 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
     insertSubview(focusImageView, belowSubview: bottomContainer)
     insertSubview(shutterOverlayView, belowSubview: bottomContainer)
 
+    closeButton.g_pin(on: .top)
     closeButton.g_pin(on: .left)
     closeButton.g_pin(size: CGSize(width: 44, height: 44))
 
@@ -71,20 +72,9 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
     flashButton.g_pin(on: .centerX)
     flashButton.g_pin(size: CGSize(width: 60, height: 44))
 
+    rotateButton.g_pin(on: .top)
     rotateButton.g_pin(on: .right)
     rotateButton.g_pin(size: CGSize(width: 44, height: 44))
-
-    if #available(iOS 11, *) {
-      Constraint.on(
-        closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-        rotateButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
-      )
-    } else {
-      Constraint.on(
-        closeButton.topAnchor.constraint(equalTo: topAnchor),
-        rotateButton.topAnchor.constraint(equalTo: topAnchor)
-      )
-    }
 
     bottomContainer.g_pinDownward()
     bottomContainer.g_pin(height: 80)
@@ -109,24 +99,18 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
     guard previewLayer == nil else { return }
 
     let layer = AVCaptureVideoPreviewLayer(session: session)
-    layer.autoreverses = true
-    layer.videoGravity = .resizeAspectFill
+    layer?.autoreverses = true
+    layer?.videoGravity = AVLayerVideoGravityResizeAspectFill
 
-    self.layer.insertSublayer(layer, at: 0)
-    layer.frame = self.layer.bounds
+    self.layer.insertSublayer(layer!, at: 0)
+    layer?.frame = self.layer.bounds
 
     previewLayer = layer
   }
 
-  override func layoutSubviews() {
-    super.layoutSubviews()
-
-    previewLayer?.frame = self.layer.bounds
-  }
-
   // MARK: - Action
 
-  @objc func viewTapped(_ gr: UITapGestureRecognizer) {
+  func viewTapped(_ gr: UITapGestureRecognizer) {
     let point = gr.location(in: self)
 
     focusImageView.transform = CGAffineTransform.identity
@@ -146,7 +130,7 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
 
   // MARK: - Timer
 
-  @objc func timerFired(_ timer: Timer) {
+  func timerFired(_ timer: Timer) {
     UIView.animate(withDuration: 0.3, animations: {
       self.focusImageView.alpha = 0
     }, completion: { _ in
@@ -166,16 +150,16 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
 
   func makeCloseButton() -> UIButton {
     let button = UIButton(type: .custom)
-    button.setImage(GalleryBundle.image("gallery_close"), for: UIControlState())
+    button.setImage(Bundle.image("gallery_close"), for: UIControlState())
 
     return button
   }
 
   func makeFlashButton() -> TripleButton {
     let states: [TripleButton.State] = [
-      TripleButton.State(title: "Gallery.Camera.Flash.Off".g_localize(fallback: "OFF"), image: GalleryBundle.image("gallery_camera_flash_off")!),
-      TripleButton.State(title: "Gallery.Camera.Flash.On".g_localize(fallback: "ON"), image: GalleryBundle.image("gallery_camera_flash_on")!),
-      TripleButton.State(title: "Gallery.Camera.Flash.Auto".g_localize(fallback: "AUTO"), image: GalleryBundle.image("gallery_camera_flash_auto")!)
+      TripleButton.State(title: "Gallery.Camera.Flash.Off".g_localize(fallback: "OFF"), image: Bundle.image("gallery_camera_flash_off")!),
+      TripleButton.State(title: "Gallery.Camera.Flash.On".g_localize(fallback: "ON"), image: Bundle.image("gallery_camera_flash_on")!),
+      TripleButton.State(title: "Gallery.Camera.Flash.Auto".g_localize(fallback: "AUTO"), image: Bundle.image("gallery_camera_flash_auto")!)
     ]
 
     let button = TripleButton(states: states)
@@ -185,7 +169,7 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
 
   func makeRotateButton() -> UIButton {
     let button = UIButton(type: .custom)
-    button.setImage(GalleryBundle.image("gallery_camera_rotate"), for: UIControlState())
+    button.setImage(Bundle.image("gallery_camera_rotate"), for: UIControlState())
 
     return button
   }
@@ -230,7 +214,7 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
   func makeFocusImageView() -> UIImageView {
     let view = UIImageView()
     view.frame.size = CGSize(width: 110, height: 110)
-    view.image = GalleryBundle.image("gallery_camera_focus")
+    view.image = Bundle.image("gallery_camera_focus")
     view.backgroundColor = .clear
     view.alpha = 0
 

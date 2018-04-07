@@ -17,7 +17,7 @@ extension UIView {
                                         toItem: view, attribute: type2,
                                         multiplier: 1, constant: constant)
     if let priority = priority {
-      constraint.priority = UILayoutPriority(priority)
+      constraint.priority = priority
     }
 
     constraint.isActive = true
@@ -72,19 +72,5 @@ extension UIView {
   func g_pinCenter(view: UIView? = nil) {
     g_pin(on: .centerX, view: view)
     g_pin(on: .centerY, view: view)
-  }
-}
-
-// https://github.com/hyperoslo/Sugar/blob/master/Sources/iOS/Constraint.swift
-struct Constraint {
-  static func on(constraints: [NSLayoutConstraint]) {
-    constraints.forEach {
-      ($0.firstItem as? UIView)?.translatesAutoresizingMaskIntoConstraints = false
-      $0.isActive = true
-    }
-  }
-
-  static func on(_ constraints: NSLayoutConstraint ...) {
-    on(constraints: constraints)
   }
 }

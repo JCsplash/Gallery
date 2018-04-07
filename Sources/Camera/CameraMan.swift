@@ -27,7 +27,7 @@ class CameraMan {
   // MARK: - Setup
 
   func setup() {
-    if Permission.Camera.status == .authorized {
+    if Permission.Camera.hasPermission {
       self.start()
     } else {
       self.delegate?.cameraManNotAvailable(self)
@@ -37,9 +37,10 @@ class CameraMan {
   func setupDevices() {
     // Input
     AVCaptureDevice
-      .devices()
-      .filter {
-        return $0.hasMediaType(.video)
+      .devices().flatMap {
+        return $0 as? AVCaptureDevice
+      }.filter {
+        return $0.hasMediaType(AVMediaTypeVideo)
       }.forEach {
         switch $0.position {
         case .front:
@@ -127,7 +128,7 @@ class CameraMan {
   }
 
   func takePhoto(_ previewLayer: AVCaptureVideoPreviewLayer, location: CLLocation?, completion: @escaping ((PHAsset?) -> Void)) {
-    guard let connection = stillImageOutput?.connection(with: .video) else { return }
+    guard let connection = stillImageOutput?.connection(withMediaType: AVMediaTypeVideo) else { return }
 
     connection.videoOrientation = Utils.videoOrientation()
 
@@ -178,7 +179,7 @@ class CameraMan {
     }
   }
 
-  func flash(_ mode: AVCaptureDevice.FlashMode) {
+  func flash(_ mode: AVCaptureFlashMode) {
     guard let device = currentInput?.device , device.isFlashModeSupported(mode) else { return }
 
     queue.async {
@@ -189,7 +190,7 @@ class CameraMan {
   }
 
   func focus(_ point: CGPoint) {
-    guard let device = currentInput?.device , device.isFocusModeSupported(AVCaptureDevice.FocusMode.locked) else { return }
+    guard let device = currentInput?.device , device.isFocusModeSupported(AVCaptureFocusMode.locked) else { return }
 
     queue.async {
       self.lock {
@@ -218,18 +219,18 @@ class CameraMan {
 
   func configurePreset(_ input: AVCaptureDeviceInput) {
     for asset in preferredPresets() {
-      if input.device.supportsSessionPreset(asset) && self.session.canSetSessionPreset(asset) {
+      if input.device.supportsAVCaptureSessionPreset(asset) && self.session.canSetSessionPreset(asset) {
         self.session.sessionPreset = asset
         return
       }
     }
   }
 
-  func preferredPresets() -> [AVCaptureSession.Preset] {
+  func preferredPresets() -> [String] {
     return [
-      .high,
-      .medium,
-      .low
+      AVCaptureSessionPresetHigh,
+      AVCaptureSessionPresetMedium,
+      AVCaptureSessionPresetLow
     ]
   }
 }

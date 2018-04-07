@@ -19,7 +19,7 @@ class EmptyView: UIView {
 
   // MARK: - Setup
 
-  private func setup() {
+  func setup() {
     [label, imageView].forEach {
       addSubview($0 as! UIView)
     }
@@ -31,7 +31,7 @@ class EmptyView: UIView {
 
   // MARK: - Controls
 
-  private func makeLabel() -> UILabel {
+  func makeLabel() -> UILabel {
     let label = UILabel()
     label.textColor = Config.EmptyView.textColor
     label.font = Config.Font.Text.regular.withSize(14)
@@ -40,7 +40,7 @@ class EmptyView: UIView {
     return label
   }
 
-  private func makeImageView() -> UIImageView {
+  func makeImageView() -> UIImageView {
     let view = UIImageView()
     view.image = Config.EmptyView.image
 

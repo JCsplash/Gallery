@@ -35,11 +35,12 @@ class PermissionView: UIView {
     settingButton.g_pinCenter()
     settingButton.g_pin(height: 44)
 
-    label.g_pin(on: .bottom, view: settingButton, on: .top, constant: -24)
+    label.g_pin(on: .bottom, view: settingButton, on: .top, constant: -33)
     label.g_pinHorizontally(padding: 50)
+    label.g_pin(greaterThanHeight: 200)
 
-    imageView.g_pin(on: .centerX)
-    imageView.g_pin(on: .bottom, view: label, on: .top, constant: -16)
+    imageView.g_pinCenter()
+    imageView.g_pin(on: .bottom, view: label, on: .top, constant: -12)
   }
 
   // MARK: - Controls
@@ -48,10 +49,12 @@ class PermissionView: UIView {
     let label = UILabel()
     label.textColor = Config.Permission.textColor
     label.font = Config.Font.Text.regular.withSize(14)
-    if Permission.Camera.needsPermission {
-      label.text = "GalleryAndCamera.Permission.Info".g_localize(fallback: "Please grant access to photos and the camera.")
-    } else {
+    if !Permission.Camera.needsPermission && Permission.Photos.needsPermission {
       label.text = "Gallery.Permission.Info".g_localize(fallback: "Please grant access to photos.")
+    } else if Permission.Camera.needsPermission && !Permission.Photos.needsPermission {
+      label.text = "Camera.Permission.Info".g_localize(fallback: "Please grant access to the camera.")
+    } else {
+      label.text = "GalleryAndCamera.Permission.Info".g_localize(fallback: "Please grant access to photos and the camera.")
     }
     label.textAlignment = .center
     label.numberOfLines = 0
@@ -76,7 +79,7 @@ class PermissionView: UIView {
 
   func makeCloseButton() -> UIButton {
     let button = UIButton(type: .custom)
-    button.setImage(GalleryBundle.image("gallery_close")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
+    button.setImage(Bundle.image("gallery_close")?.withRenderingMode(.alwaysTemplate), for: UIControlState())
     button.tintColor = Config.Grid.CloseButton.tintColor
 
     return button
