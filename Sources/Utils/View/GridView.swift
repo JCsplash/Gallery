@@ -13,6 +13,7 @@ class GridView: UIView {
   lazy var closeButton: UIButton = self.makeCloseButton()
   lazy var doneButton: UIButton = self.makeDoneButton()
   lazy var emptyView: UIView = self.makeEmptyView()
+  lazy var loadingIndicator: UIActivityIndicatorView = self.makeLoadingIndicator()
 
   // MARK: - Initialization
 
@@ -20,6 +21,7 @@ class GridView: UIView {
     super.init(frame: frame)
 
     setup()
+    loadingIndicator.startAnimating()
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -28,10 +30,10 @@ class GridView: UIView {
 
   // MARK: - Setup
 
-  func setup() {
+  private func setup() {
     backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
 
-    [collectionView, bottomView, topView, emptyView].forEach {
+    [collectionView, bottomView, topView, emptyView, loadingIndicator].forEach {
       addSubview($0)
     }
 
@@ -43,6 +45,14 @@ class GridView: UIView {
       bottomView.addSubview($0 as! UIView)
     }
 
+    if #available(iOS 9.0, *) {
+        Constraint.on(
+            loadingIndicator.centerXAnchor.constraint(equalTo: loadingIndicator.superview!.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: loadingIndicator.superview!.centerYAnchor)
+        )
+    }else{
+        //Deployment target is 9.0+ so no need to worry about this
+    }
     topView.g_pinUpward()
     topView.g_pin(height: 40)
     bottomView.g_pinDownward()
@@ -133,6 +143,14 @@ class GridView: UIView {
   func makeEmptyView() -> EmptyView {
     let view = EmptyView()
     view.isHidden = true
+
+    return view
+  }
+
+  private func makeLoadingIndicator() -> UIActivityIndicatorView {
+    let view = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    view.color = .gray
+    view.hidesWhenStopped = true
 
     return view
   }

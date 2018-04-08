@@ -1,6 +1,7 @@
 import UIKit
 import Photos
 
+/// Wrap a PHAsset
 public class Image: Equatable {
 
   public let asset: PHAsset
@@ -15,22 +16,63 @@ public class Image: Equatable {
 // MARK: - UIImage
 
 extension Image {
-  public func uiImage(ofSize size: CGSize) -> UIImage? {
+
+  /// Resolve UIImage synchronously
+  ///
+  /// - Parameter size: The target size
+  /// - Returns: The resolved UIImage, otherwise nil
+  public func resolve(completion: @escaping (UIImage?) -> Void) {
     let options = PHImageRequestOptions()
-    options.isSynchronous = true
+    options.isNetworkAccessAllowed = true
+    options.deliveryMode = .highQualityFormat
 
-    var result: UIImage? = nil
+    let targetSize = CGSize(
+      width: asset.pixelWidth,
+      height: asset.pixelHeight
+    )
 
-    PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options) { (image, _) in
-      result = image
+    PHImageManager.default().requestImage(
+      for: asset,
+      targetSize: targetSize,
+      contentMode: .default,
+      options: options) { (image, _) in
+        completion(image)
+    }
+  }
+
+  /// Resolve an array of Image
+  ///
+  /// - Parameters:
+  ///   - images: The array of Image
+  ///   - size: The target size for all images
+  ///   - completion: Called when operations completion
+  public static func resolve(images: [Image], completion: @escaping ([UIImage?]) -> Void) {
+    let dispatchGroup = DispatchGroup()
+    var convertedImages = [Int: UIImage]()
+
+    for (index, image) in images.enumerated() {
+      dispatchGroup.enter()
+
+      image.resolve(completion: { resolvedImage in
+        if let resolvedImage = resolvedImage {
+          convertedImages[index] = resolvedImage
+        }
+
+        dispatchGroup.leave()
+      })
     }
 
-    return result
+    dispatchGroup.notify(queue: .main, execute: {
+      let sortedImages = convertedImages
+        .sorted(by: { $0.key < $1.key })
+        .map({ $0.value })
+      completion(sortedImages)
+    })
   }
 }
 
 // MARK: - Equatable
 
-public func ==(lhs: Image, rhs: Image) -> Bool {
+public func == (lhs: Image, rhs: Image) -> Bool {
   return lhs.asset == rhs.asset
 }

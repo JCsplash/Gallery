@@ -42,6 +42,17 @@ class CameraController: UIViewController {
     locationManager?.stop()
   }
 
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    coordinator.animate(alongsideTransition: { _ in
+      if let connection = self.cameraView.previewLayer?.connection,
+        connection.isVideoOrientationSupported {
+        connection.videoOrientation = Utils.videoOrientation()
+      }
+    }, completion: nil)
+
+    super.viewWillTransition(to: size, with: coordinator)
+  }
+
   // MARK: - Setup
 
   func setup() {

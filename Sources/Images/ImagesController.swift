@@ -71,20 +71,20 @@ class ImagesController: UIViewController {
 
   // MARK: - Action
 
-  func closeButtonTouched(_ button: UIButton) {
+  @objc func closeButtonTouched(_ button: UIButton) {
     EventHub.shared.close?()
   }
 
-  func doneButtonTouched(_ button: UIButton) {
+  @objc func doneButtonTouched(_ button: UIButton) {
     EventHub.shared.doneWithImages?()
   }
 
-  func arrowButtonTouched(_ button: ArrowButton) {
+  @objc func arrowButtonTouched(_ button: ArrowButton) {
     dropdownController.toggle()
     button.toggle(dropdownController.expanding)
   }
 
-  func stackViewTouched(_ stackView: StackView) {
+  @objc func stackViewTouched(_ stackView: StackView) {
     EventHub.shared.stackViewTouched?()
   }
 
@@ -141,6 +141,7 @@ extension ImagesController: PageAware {
   func pageDidShow() {
     once.run {
       library.reload {
+        self.gridView.loadingIndicator.stopAnimating()
         self.dropdownController.albums = self.library.albums
         self.dropdownController.tableView.reloadData()
 
@@ -222,9 +223,9 @@ extension ImagesController: UICollectionViewDataSource, UICollectionViewDelegate
     if cart.images.contains(item) {
       cart.remove(item)
     } else {
-        if Config.Camera.imageLimit == 0 || Config.Camera.imageLimit > cart.images.count{
-            cart.add(item)
-        }
+      if Config.Camera.imageLimit == 0 || Config.Camera.imageLimit > cart.images.count{
+        cart.add(item)
+      }
     }
 
     configureFrameViews()
