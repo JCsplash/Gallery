@@ -25,14 +25,14 @@ extension Image {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
         options.deliveryMode = .highQualityFormat
-        let targetSize = getTargetSize(targetSize)
+        let aspectTargetSize = getAspectTargetSize(targetSize)
         
-        print("ORIGINAL SIZE: (\(asset.pixelWidth), \(asset.pixelHeight))")
-        print("TARGET SIZE: \(targetSize)")
+        //print("ORIGINAL SIZE: (\(asset.pixelWidth), \(asset.pixelHeight))")
+       //print("TARGET SIZE: \(aspectTargetSize)")
         
         PHImageManager.default().requestImage(
             for: asset,
-            targetSize: targetSize,
+            targetSize: aspectTargetSize,
             contentMode: .default,
             options: options) { (image, _) in
                 completion(image)
@@ -70,7 +70,7 @@ extension Image {
     }
     
     
-    private func getTargetSize(_ targetSize: CGSize? = nil) -> CGSize {
+    private func getAspectTargetSize(_ targetSize: CGSize? = nil) -> CGSize {
         guard targetSize != nil else {
             //No maximum size given - use asset full size
             return CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
