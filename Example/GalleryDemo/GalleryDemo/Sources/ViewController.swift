@@ -9,6 +9,7 @@ class ViewController: UIViewController, LightboxControllerDismissalDelegate, Gal
   var button: UIButton!
   var gallery: GalleryController!
   let editor: VideoEditing = VideoEditor()
+  let maxImageSize = CGSize(width: 2048.0, height: 2048.0) //for retrieving images from photos app
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -76,7 +77,7 @@ class ViewController: UIViewController, LightboxControllerDismissalDelegate, Gal
     LightboxConfig.DeleteButton.enabled = true
 
     //SVProgressHUD.show()
-    Image.resolve(images: images, completion: { [weak self] resolvedImages in
+    Image.resolve(images: images, targetSize: maxImageSize, completion: { [weak self] resolvedImages in
       //SVProgressHUD.dismiss()
       self?.showLightbox(images: resolvedImages.flatMap({ $0 }))
     })
