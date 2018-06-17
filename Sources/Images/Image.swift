@@ -25,17 +25,10 @@ extension Image {
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
         options.deliveryMode = .highQualityFormat
-        let aspectTargetSize = getAspectTargetSize(targetSize)
         
-        //print("ORIGINAL SIZE: (\(asset.pixelWidth), \(asset.pixelHeight))")
-       //print("TARGET SIZE: \(aspectTargetSize)")
-        
-        PHImageManager.default().requestImage(
-            for: asset,
-            targetSize: aspectTargetSize,
-            contentMode: .default,
-            options: options) { (image, _) in
-                completion(image)
+        //Use requestImageData instead of requestImage to avoid memory crash
+        PHImageManager.default().requestImageData(for: asset, options: options) { (imageData, str, orientation, hash) in
+            completion(UIImage(data: imageData!))
         }
     }
     
@@ -69,41 +62,6 @@ extension Image {
         })
     }
     
-    
-    private func getAspectTargetSize(_ targetSize: CGSize? = nil) -> CGSize {
-        guard targetSize != nil else {
-            //No maximum size given - use asset full size
-            return CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
-        }
-        var actualHeight : CGFloat = CGFloat(asset.pixelHeight)
-        var actualWidth : CGFloat = CGFloat(asset.pixelWidth)
-        let maxHeight : CGFloat = targetSize!.height
-        let maxWidth : CGFloat = targetSize!.width
-        var imgRatio : CGFloat = actualWidth/actualHeight
-        let maxRatio : CGFloat = maxWidth/maxHeight
-        if (actualHeight > maxHeight || actualWidth > maxWidth){
-            if(imgRatio < maxRatio){
-                //adjust width according to maxHeight
-                imgRatio = maxHeight / actualHeight
-                actualWidth = imgRatio * actualWidth
-                actualHeight = maxHeight
-            }
-            else if(imgRatio > maxRatio){
-                //adjust height according to maxWidth
-                imgRatio = maxWidth / actualWidth
-                actualHeight = imgRatio * actualHeight
-                actualWidth = maxWidth
-            }
-            else{
-                actualHeight = maxHeight
-                actualWidth = maxWidth
-            }
-        }
-        return CGSize(
-            width: actualWidth,
-            height: actualHeight
-        )
-    }
 }
 
 // MARK: - Equatable
