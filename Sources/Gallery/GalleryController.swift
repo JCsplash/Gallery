@@ -19,6 +19,12 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
   lazy var permissionController: PermissionController = self.makePermissionController()
   public weak var delegate: GalleryControllerDelegate?
   public let cart = Cart()
+    
+  public func reloadImageControllerData() {
+    //Cleans image memory
+    let collectionView = imagesController.gridView.collectionView
+    collectionView.reloadData()
+  }
 
   // MARK: - Init
 
