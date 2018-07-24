@@ -31,8 +31,6 @@ class GridView: UIView {
   // MARK: - Setup
 
   private func setup() {
-    backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
-
     [collectionView, bottomView, topView, emptyView, loadingIndicator].forEach {
       addSubview($0)
     }
@@ -44,24 +42,33 @@ class GridView: UIView {
     [bottomBlurView, doneButton].forEach {
       bottomView.addSubview($0 as! UIView)
     }
-
     if #available(iOS 9.0, *) {
         Constraint.on(
+            topView.leftAnchor.constraint(equalTo: topView.superview!.leftAnchor),
+            topView.rightAnchor.constraint(equalTo: topView.superview!.rightAnchor),
+            topView.heightAnchor.constraint(equalToConstant: 40),
+            
             loadingIndicator.centerXAnchor.constraint(equalTo: loadingIndicator.superview!.centerXAnchor),
             loadingIndicator.centerYAnchor.constraint(equalTo: loadingIndicator.superview!.centerYAnchor)
         )
-    }else{
-        //Deployment target is 9.0+ so no need to worry about this
+        
+        if #available(iOS 11, *) {
+            Constraint.on(
+                topView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
+            )
+        } else {
+            Constraint.on(
+                topView.topAnchor.constraint(equalTo: topView.superview!.topAnchor)
+            )
+        }
     }
-    topView.g_pinUpward()
-    topView.g_pin(height: 40)
+
     bottomView.g_pinDownward()
     bottomView.g_pin(height: 80)
 
     emptyView.g_pinEdges(view: collectionView)
-    collectionView.g_pin(on: .left)
-    collectionView.g_pin(on: .right)
-    collectionView.g_pin(on: .bottom)
+    
+    collectionView.g_pinDownward()
     collectionView.g_pin(on: .top, view: topView, on: .bottom, constant: 1)
 
     bottomBlurView.g_pinEdges()
