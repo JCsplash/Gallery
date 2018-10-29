@@ -137,8 +137,10 @@ extension VideosController: VideoBoxDelegate {
 
   func videoBoxDidTap(_ videoBox: VideoBox) {
     cart.video?.fetchPlayerItem { item in
-      guard let item = item else { return }
+      guard let _ = item else { return }
+      EventHub.shared.videoBoxTapped?()
 
+/* DEFAULT VIDEO PREVIEW VIEW CONTROLLER
       DispatchQueue.main.async {
         let controller = AVPlayerViewController()
         let player = AVPlayer(playerItem: item)
@@ -148,6 +150,7 @@ extension VideosController: VideoBoxDelegate {
           player.play()
         }
       }
+*/
     }
   }
 }

@@ -3,9 +3,9 @@ import AVFoundation
 
 public protocol GalleryControllerDelegate: class {
 
-  func galleryController(_ controller: GalleryController, didSelectImages images: [Image])
-  func galleryController(_ controller: GalleryController, didSelectVideo video: Video)
+  func galleryController(_ controller: GalleryController, didSelectMedia images: [Image], video: Video?)
   func galleryController(_ controller: GalleryController, requestLightbox images: [Image])
+  func galleryController(_ controller: GalleryController, requestVideoLightbox video: Video)
   func galleryControllerDidCancel(_ controller: GalleryController)
 }
 
@@ -133,21 +133,27 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
     }
 
     EventHub.shared.doneWithImages = { [weak self] in
-      if let strongSelf = self {
-        strongSelf.delegate?.galleryController(strongSelf, didSelectImages: strongSelf.cart.images)
-      }
+        if let strongSelf = self {
+            strongSelf.delegate?.galleryController(strongSelf, didSelectMedia: strongSelf.cart.images, video: self?.cart.video)
+        }
     }
-
+    
     EventHub.shared.doneWithVideos = { [weak self] in
-      if let strongSelf = self, let video = strongSelf.cart.video {
-        strongSelf.delegate?.galleryController(strongSelf, didSelectVideo: video)
-      }
+        if let strongSelf = self {
+            strongSelf.delegate?.galleryController(strongSelf, didSelectMedia: strongSelf.cart.images, video: self?.cart.video)
+        }
     }
 
     EventHub.shared.stackViewTouched = { [weak self] in
       if let strongSelf = self {
         strongSelf.delegate?.galleryController(strongSelf, requestLightbox: strongSelf.cart.images)
       }
+    }
+    
+    EventHub.shared.videoBoxTapped = { [weak self] in
+        if let strongSelf = self, let video = strongSelf.cart.video {
+            strongSelf.delegate?.galleryController(strongSelf, requestVideoLightbox: video)
+        }
     }
   }
 
