@@ -6,6 +6,7 @@ class ImagesController: UIViewController {
   lazy var dropdownController: DropdownController = self.makeDropdownController()
   lazy var gridView: GridView = self.makeGridView()
   lazy var stackView: StackView = self.makeStackView()
+  lazy var infoLabel: UILabel = self.makeInfoLabel()
 
   var items: [Image] = []
   let library = ImagesLibrary()
@@ -44,7 +45,9 @@ class ImagesController: UIViewController {
     gridView.insertSubview(dropdownController.view, belowSubview: gridView.topView)
     dropdownController.didMove(toParentViewController: self)
 
-    gridView.bottomView.addSubview(stackView)
+    [stackView, infoLabel].forEach {
+        gridView.bottomView.addSubview($0)
+    }
 
     gridView.g_pinEdges()
 
@@ -58,6 +61,10 @@ class ImagesController: UIViewController {
     stackView.g_pin(on: .centerY, constant: -4)
     stackView.g_pin(on: .left, constant: 38)
     stackView.g_pin(size: CGSize(width: 56, height: 56))
+    
+    infoLabel.g_pin(on: .centerY)
+    infoLabel.g_pin(on: .left, view: stackView, on: .right, constant: 11)
+    infoLabel.g_pin(on: .right, constant: -50)
 
     gridView.closeButton.addTarget(self, action: #selector(closeButtonTouched(_:)), for: .touchUpInside)
     gridView.doneButton.addTarget(self, action: #selector(doneButtonTouched(_:)), for: .touchUpInside)
@@ -134,6 +141,13 @@ class ImagesController: UIViewController {
 
     return view
   }
+    func makeInfoLabel() -> UILabel {
+        let label = UILabel()
+        label.textColor = UIColor.white
+        label.font = Config.Font.Text.regular.withSize(12)
+        label.text = "TAP TO EDIT"
+        return label
+    }
 }
 
 extension ImagesController: PageAware {
