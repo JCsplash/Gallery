@@ -81,8 +81,7 @@ class ImagesController: UIViewController, UIViewControllerPreviewingDelegate {
         //This will show the cell clearly and blur the rest of the screen for our peek.
         guard let indexPath = gridView.collectionView.indexPathForItem(at: location) else { return nil }
         guard let cell = gridView.collectionView.cellForItem(at: indexPath) else { return nil }
-        let storyboard = UIStoryboard(name: "ImagePreview", bundle: nil)
-        guard let detailVC = storyboard.instantiateViewController(withIdentifier: "ImagePreviewViewController") as? ImagePreviewViewController else {return nil }
+        let detailVC = ImagePreviewViewController()
         let item = items[(indexPath as NSIndexPath).item]
         detailVC.image = item
         detailVC.isShowingAsPreview = true
@@ -325,37 +324,5 @@ extension ImagesController: UICollectionViewDataSource, UICollectionViewDelegate
   }
 }
 
-class ImagePreviewViewController: UIViewController {
-    var isShowingAsPreview: Bool = false
-    var image: Image!
-    @IBOutlet var imageView: UIImageView!
-    @IBAction func dismiss() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.black
-        self.modalTransitionStyle = .crossDissolve
-        image.resolve { (UIImage) in
-            self.imageView.image = UIImage
-        }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if self.isShowingAsPreview {
-            let photoWidth = image.asset.pixelWidth
-            let photoHeight = image.asset.pixelHeight
-            let viewWidth = self.view.frame.size.width
-            let widthAspectRatio = CGFloat(photoWidth) / viewWidth
-            let aspectHeight = CGFloat(photoHeight) / widthAspectRatio
-            let preferredContentHeight = aspectHeight > 460 ? 460 : aspectHeight
-            self.preferredContentSize = CGSize(width: 0, height: preferredContentHeight)
-            self.imageView.contentMode = .scaleAspectFill
-        }else{
-            self.imageView.contentMode = .scaleAspectFit
-        }
-    }
-}
+
+
