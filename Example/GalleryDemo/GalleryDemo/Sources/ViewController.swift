@@ -51,36 +51,15 @@ class ViewController: UIViewController, LightboxControllerDismissalDelegate, Gal
     gallery = nil
   }
 
-  func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
-    controller.dismiss(animated: true, completion: nil)
-    gallery = nil
-
-
-    editor.edit(video: video) { (editedVideo: Video?, tempPath: URL?) in
-      DispatchQueue.main.async {
-        if let tempPath = tempPath {
-          let controller = AVPlayerViewController()
-          controller.player = AVPlayer(url: tempPath)
-
-          self.present(controller, animated: true, completion: nil)
-        }
-      }
-    }
-  }
-
-  func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+  func galleryController(_ controller: GalleryController, didSelectMedia images: [Image], video: Video?) {
     controller.dismiss(animated: true, completion: nil)
     gallery = nil
   }
-
   func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
-    LightboxConfig.DeleteButton.enabled = true
-
-    //SVProgressHUD.show()
-    Image.resolve(images: images, targetSize: maxImageSize, completion: { [weak self] resolvedImages in
-      //SVProgressHUD.dismiss()
-      self?.showLightbox(images: resolvedImages.flatMap({ $0 }))
-    })
+    return
+  }
+  func galleryController(_ controller: GalleryController, requestVideoLightbox video: Video) {
+    return
   }
 
   // MARK: - Helper

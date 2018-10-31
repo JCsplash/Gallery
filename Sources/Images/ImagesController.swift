@@ -1,7 +1,7 @@
 import UIKit
 import Photos
 
-class ImagesController: UIViewController {
+class ImagesController: UIViewController, UIViewControllerPreviewingDelegate {
 
   lazy var dropdownController: DropdownController = self.makeDropdownController()
   lazy var gridView: GridView = self.makeGridView()
@@ -37,6 +37,7 @@ class ImagesController: UIViewController {
   // MARK: - Setup
 
   func setup() {
+    registerForPreviewing(with: self, sourceView: self.gridView.collectionView)
     view.backgroundColor = UIColor.white
 
     view.addSubview(gridView)
@@ -76,6 +77,65 @@ class ImagesController: UIViewController {
     gridView.collectionView.register(ImageCell.self, forCellWithReuseIdentifier: String(describing: ImageCell.self))
   }
 
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        //This will show the cell clearly and blur the rest of the screen for our peek.
+        guard let indexPath = gridView.collectionView.indexPathForItem(at: location) else { return nil }
+        guard let cell = gridView.collectionView.cellForItem(at: indexPath) else { return nil }
+        let storyboard = UIStoryboard(name: "ImagePreview", bundle: nil)
+        guard let detailVC = storyboard.instantiateViewController(withIdentifier: "ImagePreviewViewController") as? ImagePreviewViewController else {return nil }
+        let item = items[(indexPath as NSIndexPath).item]
+        detailVC.image = item
+        detailVC.isShowingAsPreview = true
+        previewingContext.sourceRect = cell.frame
+        return detailVC
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        guard let detailVC = viewControllerToCommit as? ImagePreviewViewController else { return }
+        detailVC.isShowingAsPreview = false
+        present(detailVC, animated: true, completion: nil)
+    }
+    
+    func findImageAspectFitHeight(pixelWidth: CGFloat, pixelHeight: CGFloat) -> CGFloat {
+        var actualHeight : CGFloat = pixelHeight
+        var actualWidth : CGFloat = pixelWidth
+        
+        let maxHeight = UIScreen.main.bounds.height
+        let maxWidth = UIScreen.main.bounds.width
+        print("RETRIEVED SIZE: Width \(pixelWidth)px, Height: \(pixelHeight)px")
+        
+        var imgRatio : CGFloat = actualWidth/actualHeight
+        let maxRatio : CGFloat = maxWidth/maxHeight
+        
+        if (actualHeight > maxHeight || actualWidth > maxWidth){
+            if(imgRatio < maxRatio){
+                //adjust width according to maxHeight
+                print("ADJUSTING WIDTH ACCORDING TO HEIGHT")
+                imgRatio = maxHeight / actualHeight
+                actualWidth = imgRatio * actualWidth
+                actualHeight = maxHeight
+            }
+            else if(imgRatio > maxRatio){
+                //adjust height according to maxWidth
+                print("ADJUSTING HEIGHT ACCORDING TO WIDTH")
+                imgRatio = maxWidth / actualWidth
+                actualHeight = imgRatio * actualHeight
+                actualWidth = maxWidth
+            }
+            else{
+                actualHeight = maxHeight
+                actualWidth = maxWidth
+            }
+        }else{
+            print("Expand with to full width")
+            imgRatio = actualWidth / actualHeight
+            actualWidth = maxWidth // Use screen width
+            actualHeight = imgRatio * maxWidth //Expand height accordingly
+        }
+            print("NEW SIZE: Width \(actualWidth)px, Height: \(actualHeight)px")
+            return actualHeight
+    }
+    
   // MARK: - Action
 
   @objc func closeButtonTouched(_ button: UIButton) {
@@ -263,4 +323,39 @@ extension ImagesController: UICollectionViewDataSource, UICollectionViewDelegate
       cell.frameView.alpha = 0
     }
   }
+}
+
+class ImagePreviewViewController: UIViewController {
+    var isShowingAsPreview: Bool = false
+    var image: Image!
+    @IBOutlet var imageView: UIImageView!
+    @IBAction func dismiss() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = UIColor.black
+        self.modalTransitionStyle = .crossDissolve
+        image.resolve { (UIImage) in
+            self.imageView.image = UIImage
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.isShowingAsPreview {
+            let photoWidth = image.asset.pixelWidth
+            let photoHeight = image.asset.pixelHeight
+            let viewWidth = self.view.frame.size.width
+            let widthAspectRatio = CGFloat(photoWidth) / viewWidth
+            let aspectHeight = CGFloat(photoHeight) / widthAspectRatio
+            let preferredContentHeight = aspectHeight > 460 ? 460 : aspectHeight
+            self.preferredContentSize = CGSize(width: 0, height: preferredContentHeight)
+            self.imageView.contentMode = .scaleAspectFill
+        }else{
+            self.imageView.contentMode = .scaleAspectFit
+        }
+    }
 }
