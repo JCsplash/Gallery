@@ -81,9 +81,8 @@ class ImagesController: UIViewController, UIViewControllerPreviewingDelegate {
         //This will show the cell clearly and blur the rest of the screen for our peek.
         guard let indexPath = gridView.collectionView.indexPathForItem(at: location) else { return nil }
         guard let cell = gridView.collectionView.cellForItem(at: indexPath) else { return nil }
-        let detailVC = ImagePreviewViewController()
         let item = items[(indexPath as NSIndexPath).item]
-        detailVC.image = item
+        let detailVC = ImagePreviewViewController(image: item)
         detailVC.isShowingAsPreview = true
         previewingContext.sourceRect = cell.frame
         return detailVC
