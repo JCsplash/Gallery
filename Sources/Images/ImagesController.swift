@@ -1,7 +1,7 @@
 import UIKit
 import Photos
 
-class ImagesController: UIViewController, UIViewControllerPreviewingDelegate {
+class ImagesController: UIViewController, UIViewControllerPreviewingDelegate, UIGestureRecognizerDelegate {
 
   lazy var dropdownController: DropdownController = self.makeDropdownController()
   lazy var gridView: GridView = self.makeGridView()
@@ -37,9 +37,7 @@ class ImagesController: UIViewController, UIViewControllerPreviewingDelegate {
   // MARK: - Setup
 
   func setup() {
-    registerForPreviewing(with: self, sourceView: self.gridView.collectionView)
     view.backgroundColor = UIColor.white
-
     view.addSubview(gridView)
 
     addChildViewController(dropdownController)
@@ -76,7 +74,33 @@ class ImagesController: UIViewController, UIViewControllerPreviewingDelegate {
     gridView.collectionView.delegate = self
     gridView.collectionView.register(ImageCell.self, forCellWithReuseIdentifier: String(describing: ImageCell.self))
   }
-
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Setup Image Previewing
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: self.gridView.collectionView)
+        }else{
+            setupLongPressGesture()
+        }
+    }
+    func setupLongPressGesture(){
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(_:)))
+        lpgr.minimumPressDuration = 0.3
+        lpgr.delegate = self
+        lpgr.delaysTouchesBegan = true
+        self.gridView.collectionView.addGestureRecognizer(lpgr)
+    }
+    
+    func longPressed(_ gestureRecognizer : UILongPressGestureRecognizer){
+        guard gestureRecognizer.state == .began else { return }
+        let location = gestureRecognizer.location(in: self.gridView.collectionView)
+        guard let indexPath = gridView.collectionView.indexPathForItem(at: location) else { return }
+        let item = items[(indexPath as NSIndexPath).item]
+        let detailVC = ImagePreviewViewController(image: item)
+        present(detailVC, animated: true, completion: nil)
+    }
+    
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         //This will show the cell clearly and blur the rest of the screen for our peek.
         guard let indexPath = gridView.collectionView.indexPathForItem(at: location) else { return nil }
