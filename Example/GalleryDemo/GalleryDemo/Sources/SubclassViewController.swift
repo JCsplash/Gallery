@@ -13,7 +13,7 @@ class SubclassViewController: GalleryController, LightboxControllerDismissalDele
     Gallery.Config.initialTab = .imageTab
     Gallery.Config.Camera.imageLimit = 20
     super.viewDidLoad()
-    self.delegate = self
+    self.galleryDelegate = self
 
   }
   

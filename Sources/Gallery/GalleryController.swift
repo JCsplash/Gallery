@@ -22,23 +22,13 @@ open class GalleryController: UIViewController, PermissionControllerDelegate {
 
   lazy var pagesController: PagesController = self.makePagesController()
   lazy var permissionController: PermissionController = self.makePermissionController()
-  public weak var delegate: GalleryControllerDelegate?
+  public weak var galleryDelegate: GalleryControllerDelegate?
   public let cart = Cart()
     
   public func reloadImageControllerData() {
     //Cleans image memory
     let collectionView = imagesController.gridView.collectionView
     collectionView.reloadData()
-  }
-
-  // MARK: - Init
-
-  public required init() {
-    super.init(nibName: nil, bundle: nil)
-  }
-
-  public required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
   }
 
   // MARK: - Life cycle
@@ -133,31 +123,31 @@ open class GalleryController: UIViewController, PermissionControllerDelegate {
   func setup() {
     EventHub.shared.close = { [weak self] in
       if let strongSelf = self {
-        strongSelf.delegate?.galleryControllerDidCancel(strongSelf)
+        strongSelf.galleryDelegate?.galleryControllerDidCancel(strongSelf)
       }
     }
 
     EventHub.shared.doneWithImages = { [weak self] in
         if let strongSelf = self {
-            strongSelf.delegate?.galleryController(strongSelf, didSelectMedia: strongSelf.cart.images, video: self?.cart.video)
+            strongSelf.galleryDelegate?.galleryController(strongSelf, didSelectMedia: strongSelf.cart.images, video: self?.cart.video)
         }
     }
     
     EventHub.shared.doneWithVideos = { [weak self] in
         if let strongSelf = self {
-            strongSelf.delegate?.galleryController(strongSelf, didSelectMedia: strongSelf.cart.images, video: self?.cart.video)
+            strongSelf.galleryDelegate?.galleryController(strongSelf, didSelectMedia: strongSelf.cart.images, video: self?.cart.video)
         }
     }
 
     EventHub.shared.stackViewTouched = { [weak self] in
       if let strongSelf = self {
-        strongSelf.delegate?.galleryController(strongSelf, requestLightbox: strongSelf.cart.images)
+        strongSelf.galleryDelegate?.galleryController(strongSelf, requestLightbox: strongSelf.cart.images)
       }
     }
     
     EventHub.shared.videoBoxTapped = { [weak self] in
         if let strongSelf = self, let video = strongSelf.cart.video {
-            strongSelf.delegate?.galleryController(strongSelf, requestVideoLightbox: video)
+            strongSelf.galleryDelegate?.galleryController(strongSelf, requestVideoLightbox: video)
         }
     }
   }

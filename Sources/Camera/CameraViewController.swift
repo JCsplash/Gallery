@@ -11,12 +11,17 @@ import AVFoundation
 import AVKit
 
 class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDelegate {
-
+    
+    /*
+     Todos:
+     2. Test other screen sizes for Video Recording
+     3. Fix Small UI Issues
+     */
+    
     var flipCameraButton: UIButton!
     var flashButton: UIButton!
     var cancelButton: UIButton!
     var captureButton: SwiftyRecordButton!
-    var delegate: CameraViewDelegate?
     
     private var tmpVideoURLs = NSSet() //to be cleaned up when deinit
     
@@ -52,7 +57,7 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didTake photo: UIImage) {
         if let galleryVC = self.parent?.parent as? GalleryController {
-            galleryVC.delegate?.galleryController(galleryVC, capturedPhoto: photo)
+            galleryVC.galleryDelegate?.galleryController(galleryVC, capturedPhoto: photo)
         }
     }
     
@@ -116,7 +121,7 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
         tmpVideoURLs.adding(url) //to be cleaned up later
 //        self.showAllButtons()
         if let galleryVC = self.parent?.parent as? GalleryController {
-            galleryVC.delegate?.galleryController(galleryVC, capturedVideo: url)
+            galleryVC.galleryDelegate?.galleryController(galleryVC, capturedVideo: url)
         }
     }
     
@@ -162,7 +167,7 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     }
     
     func cancelButtonPressed(_ sender: Any) {
-        print("CANCEL BUTTON PRESSED")
+        EventHub.shared.close?()
     }
 
     private func addButtons() {

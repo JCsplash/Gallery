@@ -41,7 +41,7 @@ class ViewController: UIViewController, LightboxControllerDismissalDelegate, Gal
 
   func buttonTouched(_ button: UIButton) {
     gallery = GalleryController()
-    gallery.delegate = self
+    gallery.galleryDelegate = self
 
     present(gallery, animated: true, completion: nil)
   }
