@@ -7,8 +7,14 @@ import AVKit
 class SubclassViewController: GalleryController, LightboxControllerDismissalDelegate, GalleryControllerDelegate {
   
   override func viewDidLoad() {
+
+    //        Gallery.Config.VideoEditor.maximumDuration = 30.0
+    Gallery.Config.tabsToShow =  [.imageTab, .cameraTab, .videoTab]
+    Gallery.Config.initialTab = .imageTab
+    Gallery.Config.Camera.imageLimit = 20
     super.viewDidLoad()
     self.delegate = self
+
   }
   
   

@@ -16,6 +16,9 @@
 		3A10C9A82254F80F00A0061D /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9A72254F80F00A0061D /* AudioUtils.swift */; };
 		3A10C9AB2254F89000A0061D /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9AA2254F89000A0061D /* UIColor+Theme.swift */; };
 		3A10C9AD2254FB8300A0061D /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9AC2254FB8300A0061D /* UIColor+Hex.swift */; };
+		3A10C9B12255023D00A0061D /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9B02255023D00A0061D /* CameraViewController.swift */; };
+		3A10C9B42255031000A0061D /* SwiftyRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9B22255030F00A0061D /* SwiftyRecordButton.swift */; };
+		3A10C9B52255031000A0061D /* SwiftyUploadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9B32255030F00A0061D /* SwiftyUploadButton.swift */; };
 		3A214B58218A49870017EFC1 /* ImagePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A214B57218A49870017EFC1 /* ImagePreviewController.swift */; };
 		A1D105517C585FA5CDE1E3F2 /* Pods_Gallery_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F34E5451DF3FC00CD358E9 /* Pods_Gallery_iOS_Tests.framework */; };
 		D24CF7321E93D1FB002E6484 /* Gallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D24CF7311E93D1FB002E6484 /* Gallery.bundle */; };
@@ -93,6 +96,9 @@
 		3A10C9A72254F80F00A0061D /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
 		3A10C9AA2254F89000A0061D /* UIColor+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
 		3A10C9AC2254FB8300A0061D /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		3A10C9B02255023D00A0061D /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		3A10C9B22255030F00A0061D /* SwiftyRecordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyRecordButton.swift; sourceTree = "<group>"; };
+		3A10C9B32255030F00A0061D /* SwiftyUploadButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyUploadButton.swift; sourceTree = "<group>"; };
 		3A214B57218A49870017EFC1 /* ImagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewController.swift; sourceTree = "<group>"; };
 		62D67D2E079D4262A90518CB /* Pods-Gallery-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gallery-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gallery-iOS/Pods-Gallery-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		8275705FE55C8A648DE4888B /* Pods-Gallery-iOS-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gallery-iOS-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gallery-iOS-Tests/Pods-Gallery-iOS-Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -182,6 +188,8 @@
 		3A10C9992254F12800A0061D /* SwiftyCam */ = {
 			isa = PBXGroup;
 			children = (
+				3A10C9B22255030F00A0061D /* SwiftyRecordButton.swift */,
+				3A10C9B32255030F00A0061D /* SwiftyUploadButton.swift */,
 				3A10C99B2254F1B800A0061D /* PreviewView.swift */,
 				3A10C99C2254F1B800A0061D /* SwiftyCamButton.swift */,
 				3A10C99D2254F1B800A0061D /* SwiftyCamViewController.swift */,
@@ -237,6 +245,7 @@
 				D2E021B01DAF6E4700984B5A /* StackView.swift */,
 				D2E021B11DAF6E4700984B5A /* TripleButton.swift */,
 				D27B72EF1D6EEED10093318F /* CameraController.swift */,
+				3A10C9B02255023D00A0061D /* CameraViewController.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -638,6 +647,7 @@
 				D2E0218F1DAF6E3B00984B5A /* UIView+Extensions.swift in Sources */,
 				3A10C9A62254F73800A0061D /* CommonUtils.swift in Sources */,
 				D2E0219E1DAF6E3B00984B5A /* AlbumCell.swift in Sources */,
+				3A10C9B42255031000A0061D /* SwiftyRecordButton.swift in Sources */,
 				D2E021921DAF6E3B00984B5A /* LocationManager.swift in Sources */,
 				D2E021941DAF6E3B00984B5A /* PageIndicator.swift in Sources */,
 				D2E021A81DAF6E4300984B5A /* Album.swift in Sources */,
@@ -649,9 +659,11 @@
 				D2E021B41DAF6E4700984B5A /* ShutterButton.swift in Sources */,
 				D2E021A01DAF6E3B00984B5A /* EmptyView.swift in Sources */,
 				D2E021B61DAF6E4700984B5A /* TripleButton.swift in Sources */,
+				3A10C9B52255031000A0061D /* SwiftyUploadButton.swift in Sources */,
 				D2E021881DAF6E3B00984B5A /* DropdownController.swift in Sources */,
 				D2E021861DAF6E3B00984B5A /* Config.swift in Sources */,
 				D2E0218E1DAF6E3B00984B5A /* UIScrollView+Extensions.swift in Sources */,
+				3A10C9B12255023D00A0061D /* CameraViewController.swift in Sources */,
 				D2E0215C1DAF6E2C00984B5A /* Video.swift in Sources */,
 				D2E0215F1DAF6E2C00984B5A /* VideosController.swift in Sources */,
 				3A10C9A82254F80F00A0061D /* AudioUtils.swift in Sources */,

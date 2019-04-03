@@ -25,4 +25,12 @@ class CommonUtils {
             }
         }
     }
+    static var safeAreaInsets: UIEdgeInsets {
+        let UIEdgeInsetsZero = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0)
+        if #available(iOS 11.0, *) {
+            return UIApplication.shared.keyWindow?.safeAreaInsets ?? UIEdgeInsetsZero
+        }else{
+            return UIEdgeInsetsZero
+        }
+    }
 }
