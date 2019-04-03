@@ -13,6 +13,8 @@ class PagesController: UIViewController {
   lazy var pageIndicator: PageIndicator = self.makePageIndicator()
 
   var selectedIndex: Int = 0
+var pageIndicatorHeightConstraint: NSLayoutConstraint!
+
   let once = Once()
 
   // MARK: - Initialization
@@ -74,10 +76,13 @@ class PagesController: UIViewController {
       view.addSubview(pageIndicator)
         Constraint.on(
             pageIndicator.leftAnchor.constraint(equalTo: pageIndicator.superview!.leftAnchor),
-            pageIndicator.rightAnchor.constraint(equalTo: pageIndicator.superview!.rightAnchor),
-            pageIndicator.heightAnchor.constraint(equalToConstant: 40)
+            pageIndicator.rightAnchor.constraint(equalTo: pageIndicator.superview!.rightAnchor)
         )
         
+        // Page indicator hides when video begins recording
+        pageIndicatorHeightConstraint = NSLayoutConstraint(item: pageIndicator, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 40)
+        pageIndicatorHeightConstraint.isActive = true
+
         if #available(iOS 11, *) {
             Constraint.on(
                 pageIndicator.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

@@ -46,6 +46,9 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
         addButtons()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        showAllButtons()
+    }
     
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didTake photo: UIImage) {
         print("DID CAPTURE PHOTO!!!")
@@ -60,10 +63,12 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
             guard self.shouldChangeAudio, !self.isVideoRecording else { return }
             print("Video Capture: Start animation since touch is longer than 150ms")
             self.captureButton.growButton(duration: 0.8)
+            self.hidePageIndicator()
             UIView.animate(withDuration: 0.25, animations: {
                 self.flashButton.alpha = 0.0
                 self.flipCameraButton.alpha = 0.0
                 self.cancelButton.alpha = 0.0
+                self.view.layoutIfNeeded()
             })
         })
     }
@@ -108,6 +113,7 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didFinishProcessVideoAt url: URL) {
         print("DID CAPTURE VIDEO!!")
         tmpVideoURLs.adding(url) //to be cleaned up later
+        self.showAllButtons()
     }
     
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didFocusAtPoint point: CGPoint) {
@@ -143,7 +149,7 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     
     @objc private func toggleFlashAction(_ sender: Any) {
         flashEnabled = !flashEnabled
-        
+
         if flashEnabled == true {
             flashButton.setImage(Bundle.image("flash_fill"), for: UIControlState())
         } else {
@@ -199,11 +205,24 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     }
     
     private func showAllButtons() {
+        self.showPageIndicator()
         UIView.animate(withDuration: 0.25, animations: {
             self.flashButton.alpha = 1.0
             self.flipCameraButton.alpha = 1.0
             self.cancelButton.alpha = 1.0
             self.captureButton.alpha = 1.0
+            self.view.layoutIfNeeded()
         })
+    }
+    
+    private func hidePageIndicator() {
+        if let pagesVC = self.parent as? PagesController {
+            pagesVC.pageIndicatorHeightConstraint.constant = 0
+        }
+    }
+    private func showPageIndicator() {
+        if let pagesVC = self.parent as? PagesController {
+            pagesVC.pageIndicatorHeightConstraint.constant = 40
+        }
     }
 }
