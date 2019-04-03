@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A10C99E2254F1B900A0061D /* SwiftyCamViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C99A2254F1B800A0061D /* SwiftyCamViewControllerDelegate.swift */; };
+		3A10C99F2254F1B900A0061D /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C99B2254F1B800A0061D /* PreviewView.swift */; };
+		3A10C9A02254F1B900A0061D /* SwiftyCamButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C99C2254F1B800A0061D /* SwiftyCamButton.swift */; };
+		3A10C9A12254F1B900A0061D /* SwiftyCamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C99D2254F1B800A0061D /* SwiftyCamViewController.swift */; };
+		3A10C9A42254F72A00A0061D /* AlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9A32254F72A00A0061D /* AlertUtils.swift */; };
+		3A10C9A62254F73800A0061D /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9A52254F73800A0061D /* CommonUtils.swift */; };
+		3A10C9A82254F80F00A0061D /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9A72254F80F00A0061D /* AudioUtils.swift */; };
+		3A10C9AB2254F89000A0061D /* UIColor+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9AA2254F89000A0061D /* UIColor+Theme.swift */; };
+		3A10C9AD2254FB8300A0061D /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10C9AC2254FB8300A0061D /* UIColor+Hex.swift */; };
 		3A214B58218A49870017EFC1 /* ImagePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A214B57218A49870017EFC1 /* ImagePreviewController.swift */; };
+		A1D105517C585FA5CDE1E3F2 /* Pods_Gallery_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F34E5451DF3FC00CD358E9 /* Pods_Gallery_iOS_Tests.framework */; };
 		D24CF7321E93D1FB002E6484 /* Gallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D24CF7311E93D1FB002E6484 /* Gallery.bundle */; };
 		D27B72ED1D6EEEC80093318F /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27B72EC1D6EEEC80093318F /* Tests.swift */; };
 		D27B72FD1D6EEED10093318F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27B72EF1D6EEED10093318F /* CameraController.swift */; };
@@ -59,6 +69,7 @@
 		D2E021B61DAF6E4700984B5A /* TripleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E021B11DAF6E4700984B5A /* TripleButton.swift */; };
 		D2E021B81DAF70A800984B5A /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E021B71DAF70A800984B5A /* Constraints.swift */; };
 		D5B2E8AA1C3A780C00C0327D /* Gallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B2E89F1C3A780C00C0327D /* Gallery.framework */; };
+		E5120C2C271B4BE17DE0D5F7 /* Pods_Gallery_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A953DEFAB7ACF0E3C43E40DE /* Pods_Gallery_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +83,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		272F76987AB1285431489355 /* Pods-Gallery-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gallery-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gallery-iOS/Pods-Gallery-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		3A10C99A2254F1B800A0061D /* SwiftyCamViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCamViewControllerDelegate.swift; sourceTree = "<group>"; };
+		3A10C99B2254F1B800A0061D /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		3A10C99C2254F1B800A0061D /* SwiftyCamButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCamButton.swift; sourceTree = "<group>"; };
+		3A10C99D2254F1B800A0061D /* SwiftyCamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCamViewController.swift; sourceTree = "<group>"; };
+		3A10C9A32254F72A00A0061D /* AlertUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertUtils.swift; sourceTree = "<group>"; };
+		3A10C9A52254F73800A0061D /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
+		3A10C9A72254F80F00A0061D /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUtils.swift; sourceTree = "<group>"; };
+		3A10C9AA2254F89000A0061D /* UIColor+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Theme.swift"; sourceTree = "<group>"; };
+		3A10C9AC2254FB8300A0061D /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		3A214B57218A49870017EFC1 /* ImagePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewController.swift; sourceTree = "<group>"; };
+		62D67D2E079D4262A90518CB /* Pods-Gallery-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gallery-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gallery-iOS/Pods-Gallery-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		8275705FE55C8A648DE4888B /* Pods-Gallery-iOS-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gallery-iOS-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gallery-iOS-Tests/Pods-Gallery-iOS-Tests.release.xcconfig"; sourceTree = "<group>"; };
+		A953DEFAB7ACF0E3C43E40DE /* Pods_Gallery_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gallery_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC9E3736DF3F804217B90F2E /* Pods-Gallery-iOS-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gallery-iOS-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gallery-iOS-Tests/Pods-Gallery-iOS-Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		C4F34E5451DF3FC00CD358E9 /* Pods_Gallery_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gallery_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24CF7311E93D1FB002E6484 /* Gallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Gallery.bundle; sourceTree = "<group>"; };
 		D27B72EC1D6EEEC80093318F /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		D27B72EF1D6EEED10093318F /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
@@ -137,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5120C2C271B4BE17DE0D5F7 /* Pods_Gallery_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,12 +172,54 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5B2E8AA1C3A780C00C0327D /* Gallery.framework in Frameworks */,
+				A1D105517C585FA5CDE1E3F2 /* Pods_Gallery_iOS_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A10C9992254F12800A0061D /* SwiftyCam */ = {
+			isa = PBXGroup;
+			children = (
+				3A10C99B2254F1B800A0061D /* PreviewView.swift */,
+				3A10C99C2254F1B800A0061D /* SwiftyCamButton.swift */,
+				3A10C99D2254F1B800A0061D /* SwiftyCamViewController.swift */,
+				3A10C99A2254F1B800A0061D /* SwiftyCamViewControllerDelegate.swift */,
+			);
+			path = SwiftyCam;
+			sourceTree = "<group>";
+		};
+		3A10C9A22254F71900A0061D /* CustomUtils */ = {
+			isa = PBXGroup;
+			children = (
+				3A10C9A32254F72A00A0061D /* AlertUtils.swift */,
+				3A10C9A72254F80F00A0061D /* AudioUtils.swift */,
+				3A10C9A52254F73800A0061D /* CommonUtils.swift */,
+			);
+			path = CustomUtils;
+			sourceTree = "<group>";
+		};
+		3A10C9A92254F87F00A0061D /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				3A10C9AA2254F89000A0061D /* UIColor+Theme.swift */,
+				3A10C9AC2254FB8300A0061D /* UIColor+Hex.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		9152178E1FD7024F545934F3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				62D67D2E079D4262A90518CB /* Pods-Gallery-iOS.debug.xcconfig */,
+				272F76987AB1285431489355 /* Pods-Gallery-iOS.release.xcconfig */,
+				AC9E3736DF3F804217B90F2E /* Pods-Gallery-iOS-Tests.debug.xcconfig */,
+				8275705FE55C8A648DE4888B /* Pods-Gallery-iOS-Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D24CF7301E93D1FB002E6484 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,7 +276,7 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		D27B72FB1D6EEED10093318F /* Video */ = {
+		D27B72FB1D6EEED10093318F /* Videos */ = {
 			isa = PBXGroup;
 			children = (
 				D2E021571DAF6E2C00984B5A /* Video.swift */,
@@ -216,7 +285,7 @@
 				D2E0215A1DAF6E2C00984B5A /* VideosController.swift */,
 				D2E0215B1DAF6E2C00984B5A /* VideosLibrary.swift */,
 			);
-			path = Video;
+			path = Videos;
 			sourceTree = "<group>";
 		};
 		D27B73091D6EEFDB0093318F /* Gallery */ = {
@@ -231,6 +300,8 @@
 			isa = PBXGroup;
 			children = (
 				D27B730C1D6EF04D0093318F /* Cartography.framework */,
+				A953DEFAB7ACF0E3C43E40DE /* Pods_Gallery_iOS.framework */,
+				C4F34E5451DF3FC00CD358E9 /* Pods_Gallery_iOS_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -309,6 +380,7 @@
 				D5C6295C1C3A800E007F7B7C /* Gallery */,
 				D5C6298F1C3A8BDA007F7B7C /* GalleryTests */,
 				D5B2E8A01C3A780C00C0327D /* Products */,
+				9152178E1FD7024F545934F3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -333,11 +405,14 @@
 		D5C629691C3A809D007F7B7C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3A10C9A92254F87F00A0061D /* Theme */,
+				3A10C9A22254F71900A0061D /* CustomUtils */,
+				3A10C9992254F12800A0061D /* SwiftyCam */,
 				D27B73091D6EEFDB0093318F /* Gallery */,
 				D27B72EE1D6EEED10093318F /* Camera */,
 				D27B72F01D6EEED10093318F /* Images */,
 				D27B72F61D6EEED10093318F /* Utils */,
-				D27B72FB1D6EEED10093318F /* Video */,
+				D27B72FB1D6EEED10093318F /* Videos */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -368,6 +443,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5B2E8B31C3A780C00C0327D /* Build configuration list for PBXNativeTarget "Gallery-iOS" */;
 			buildPhases = (
+				1F7787F725187587D7D81DB0 /* [CP] Check Pods Manifest.lock */,
 				D5B2E89A1C3A780C00C0327D /* Sources */,
 				D5B2E89B1C3A780C00C0327D /* Frameworks */,
 				D5B2E89C1C3A780C00C0327D /* Headers */,
@@ -386,9 +462,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5B2E8B61C3A780C00C0327D /* Build configuration list for PBXNativeTarget "Gallery-iOS-Tests" */;
 			buildPhases = (
+				77AE415373F290D3838E045F /* [CP] Check Pods Manifest.lock */,
 				D5B2E8A51C3A780C00C0327D /* Sources */,
 				D5B2E8A61C3A780C00C0327D /* Frameworks */,
 				D5B2E8A71C3A780C00C0327D /* Resources */,
+				5B6D482F7D430604C810B88B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -456,6 +534,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1F7787F725187587D7D81DB0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Gallery-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B6D482F7D430604C810B88B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Gallery-iOS-Tests/Pods-Gallery-iOS-Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FCAlertView/FCAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FCAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gallery-iOS-Tests/Pods-Gallery-iOS-Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		77AE415373F290D3838E045F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Gallery-iOS-Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D5B2E89A1C3A780C00C0327D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -468,6 +605,7 @@
 				D2E021B31DAF6E4700984B5A /* CameraView.swift in Sources */,
 				D2E0219F1DAF6E3B00984B5A /* ArrowButton.swift in Sources */,
 				D2E0219A1DAF6E3B00984B5A /* AdvancedVideoEditor.swift in Sources */,
+				3A10C9A02254F1B900A0061D /* SwiftyCamButton.swift in Sources */,
 				D2E021AB1DAF6E4300984B5A /* ImageCell.swift in Sources */,
 				D2E0218B1DAF6E3B00984B5A /* AVAsset+Extensions.swift in Sources */,
 				D2E0219D1DAF6E3B00984B5A /* VideoEditor.swift in Sources */,
@@ -485,13 +623,20 @@
 				D2E021601DAF6E2C00984B5A /* VideosLibrary.swift in Sources */,
 				D2E0215D1DAF6E2C00984B5A /* VideoBox.swift in Sources */,
 				D2E021931DAF6E3B00984B5A /* Once.swift in Sources */,
+				3A10C9AD2254FB8300A0061D /* UIColor+Hex.swift in Sources */,
 				D27B72FE1D6EEED10093318F /* ImagesController.swift in Sources */,
 				D2E021891DAF6E3B00984B5A /* EventHub.swift in Sources */,
 				D27B730B1D6EEFDB0093318F /* GalleryController.swift in Sources */,
 				D2E021971DAF6E3B00984B5A /* PermissionController.swift in Sources */,
 				D2E021901DAF6E3B00984B5A /* UIViewController+Extensions.swift in Sources */,
+				3A10C9AB2254F89000A0061D /* UIColor+Theme.swift in Sources */,
+				3A10C99F2254F1B900A0061D /* PreviewView.swift in Sources */,
+				3A10C99E2254F1B900A0061D /* SwiftyCamViewControllerDelegate.swift in Sources */,
+				3A10C9A42254F72A00A0061D /* AlertUtils.swift in Sources */,
 				D2E021B51DAF6E4700984B5A /* StackView.swift in Sources */,
+				3A10C9A12254F1B900A0061D /* SwiftyCamViewController.swift in Sources */,
 				D2E0218F1DAF6E3B00984B5A /* UIView+Extensions.swift in Sources */,
+				3A10C9A62254F73800A0061D /* CommonUtils.swift in Sources */,
 				D2E0219E1DAF6E3B00984B5A /* AlbumCell.swift in Sources */,
 				D2E021921DAF6E3B00984B5A /* LocationManager.swift in Sources */,
 				D2E021941DAF6E3B00984B5A /* PageIndicator.swift in Sources */,
@@ -509,6 +654,7 @@
 				D2E0218E1DAF6E3B00984B5A /* UIScrollView+Extensions.swift in Sources */,
 				D2E0215C1DAF6E2C00984B5A /* Video.swift in Sources */,
 				D2E0215F1DAF6E2C00984B5A /* VideosController.swift in Sources */,
+				3A10C9A82254F80F00A0061D /* AudioUtils.swift in Sources */,
 				D2E021951DAF6E3B00984B5A /* PagesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,6 +776,7 @@
 		};
 		D5B2E8B41C3A780C00C0327D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62D67D2E079D4262A90518CB /* Pods-Gallery-iOS.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -655,6 +802,7 @@
 		};
 		D5B2E8B51C3A780C00C0327D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 272F76987AB1285431489355 /* Pods-Gallery-iOS.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -679,6 +827,7 @@
 		};
 		D5B2E8B71C3A780C00C0327D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC9E3736DF3F804217B90F2E /* Pods-Gallery-iOS-Tests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -696,6 +845,7 @@
 		};
 		D5B2E8B81C3A780C00C0327D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8275705FE55C8A648DE4888B /* Pods-Gallery-iOS-Tests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
