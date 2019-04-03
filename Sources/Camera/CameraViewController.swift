@@ -15,7 +15,6 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     var flipCameraButton: UIButton!
     var flashButton: UIButton!
     var cancelButton: UIButton!
-    var uploadButton: SwiftyUploadButton!
     var captureButton: SwiftyRecordButton!
     var delegate: CameraViewDelegate?
     
@@ -35,7 +34,6 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
             }
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +64,6 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
                 self.flashButton.alpha = 0.0
                 self.flipCameraButton.alpha = 0.0
                 self.cancelButton.alpha = 0.0
-                self.uploadButton.alpha = 0.0
             })
         })
     }
@@ -82,11 +79,12 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     
     override func buttonTouchesCancelled() {
         super.buttonTouchesCancelled()
-        shouldChangeAudio = false
-        guard self.isLongPressing == false && self.isVideoRecording == false else {return}
-        print("Video Capture: Cancel animation since touch is less than 250ms")
-        self.captureButton.shrinkButton()
-        self.showAllButtons()
+        print("Button Touches Cancelled (Not Expected)")
+//        shouldChangeAudio = false
+//        guard self.isLongPressing == false && self.isVideoRecording == false else {return}
+//        print("Video Capture: Cancel animation since touch is less than 250ms")
+//        self.captureButton.shrinkButton()
+//        self.showAllButtons()
     }
     
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didBeginRecordingVideo camera: SwiftyCamViewController.CameraSelection) {
@@ -156,22 +154,14 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     func cancelButtonPressed(_ sender: Any) {
         print("CANCEL BUTTON PRESSED")
     }
-    
-    func uploadButtonPressed(_ sender: Any) {
-        print("UPLOAD BUTTON PRESSED")
-    }
-    
+
     private func addButtons() {
         let safeAreaTopSpace = CommonUtils.safeAreaInsets.top * 0.8
         let safeAreaBottomSpace = CommonUtils.safeAreaInsets.bottom * 0.6
         
-        captureButton = SwiftyRecordButton(frame: CGRect(x: view.frame.midX - 37.5, y: view.frame.height - 100.0 - 25.0 - safeAreaBottomSpace, width: 75.0, height: 75.0))
+        captureButton = SwiftyRecordButton(frame: CGRect(x: view.frame.midX - 37.5, y: view.frame.height - 110.0 - 25.0 - safeAreaBottomSpace, width: 75.0, height: 75.0))
         self.view.addSubview(captureButton)
         captureButton.delegate = self
-        
-        uploadButton = SwiftyUploadButton(frame: CGRect(x: view.frame.midX - 12.5, y: view.frame.height - 35.0 - safeAreaBottomSpace, width: 25.0, height: 25.0))
-        uploadButton.addTarget(self, action: #selector(uploadButtonPressed(_:)), for: .touchUpInside)
-        self.view.addSubview(uploadButton)
         
         let flashView = UIView(frame: CGRect(x: view.frame.width / 2 - 25.0, y: 0.0 + safeAreaTopSpace, width: 50.0, height: 50.0))
         flashButton = UIButton(frame: CGRect(x: 25.0 - 9.0, y: 25.0 - 15.0 , width: 18.0, height: 30.0))
@@ -213,7 +203,6 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
             self.flashButton.alpha = 1.0
             self.flipCameraButton.alpha = 1.0
             self.cancelButton.alpha = 1.0
-            self.uploadButton.alpha = 1.0
             self.captureButton.alpha = 1.0
         })
     }
