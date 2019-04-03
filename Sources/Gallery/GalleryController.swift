@@ -6,6 +6,11 @@ public protocol GalleryControllerDelegate: class {
   func galleryController(_ controller: GalleryController, didSelectMedia images: [Image], video: Video?)
   func galleryController(_ controller: GalleryController, requestLightbox images: [Image])
   func galleryController(_ controller: GalleryController, requestVideoLightbox video: Video)
+    
+  func galleryController(_ controller: GalleryController, capturedPhoto image: UIImage)
+  func galleryController(_ controller: GalleryController, capturedVideo videoURL: URL)
+
+
   func galleryControllerDidCancel(_ controller: GalleryController)
 }
 

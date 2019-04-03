@@ -38,6 +38,13 @@ class SubclassViewController: GalleryController, LightboxControllerDismissalDele
     print("requestVideoLightbox Called")
     return
   }
+  func galleryController(_ controller: GalleryController, capturedPhoto image: UIImage) {
+    print("capturedPhoto Called")
+  }
+  
+  func galleryController(_ controller: GalleryController, capturedVideo videoURL: URL) {
+    print("captureVideo Called")
+  }
 //  override func viewWillAppear(_ animated: Bool) {
 //    super.viewWillAppear(animated)
 //    self.navigationController?.setNavigationBarHidden(true, animated: animated)

@@ -5,6 +5,14 @@ import AVFoundation
 import AVKit
 
 class ViewController: UIViewController, LightboxControllerDismissalDelegate, GalleryControllerDelegate {
+  func galleryController(_ controller: GalleryController, capturedPhoto image: UIImage) {
+    return
+  }
+  
+  func galleryController(_ controller: GalleryController, capturedVideo videoURL: URL) {
+    return
+  }
+  
 
   var button: UIButton!
   var gallery: GalleryController!

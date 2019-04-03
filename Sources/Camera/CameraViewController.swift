@@ -51,7 +51,9 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     }
     
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didTake photo: UIImage) {
-        print("DID CAPTURE PHOTO!!!")
+        if let galleryVC = self.parent?.parent as? GalleryController {
+            galleryVC.delegate?.galleryController(galleryVC, capturedPhoto: photo)
+        }
     }
     
     
@@ -111,9 +113,11 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     
     //MARK - CAMERA METHODS
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didFinishProcessVideoAt url: URL) {
-        print("DID CAPTURE VIDEO!!")
         tmpVideoURLs.adding(url) //to be cleaned up later
-        self.showAllButtons()
+//        self.showAllButtons()
+        if let galleryVC = self.parent?.parent as? GalleryController {
+            galleryVC.delegate?.galleryController(galleryVC, capturedVideo: url)
+        }
     }
     
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didFocusAtPoint point: CGPoint) {
