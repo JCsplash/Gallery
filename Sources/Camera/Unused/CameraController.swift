@@ -1,6 +1,7 @@
+/*
 import UIKit
 import AVFoundation
-
+ 
 class CameraController: UIViewController {
 
   var locationManager: LocationManager?
@@ -212,3 +213,4 @@ extension CameraController: CameraManDelegate {
   }
 
 }
+*/

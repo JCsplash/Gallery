@@ -1,3 +1,4 @@
+/*
 import UIKit
 
 class TripleButton: UIButton {
@@ -50,3 +51,4 @@ class TripleButton: UIButton {
     setImage(state.image, for: UIControlState())
   }
 }
+*/

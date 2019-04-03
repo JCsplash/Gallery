@@ -1,3 +1,4 @@
+/*
 import UIKit
 import AVFoundation
 
@@ -270,3 +271,4 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
   }
 
 }
+*/

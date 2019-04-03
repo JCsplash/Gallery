@@ -1,3 +1,4 @@
+/*
 import UIKit
 
 class ShutterButton: UIButton {
@@ -65,3 +66,4 @@ class ShutterButton: UIButton {
     }
   }
 }
+*/
