@@ -88,7 +88,12 @@ class VideosController: UIViewController {
     gridView.collectionView.g_updateBottomInset(hasVideo ? gridView.bottomView.frame.size.height : 0)
 
     cart.video?.fetchDuration { [weak self] duration in
-      self?.infoLabel.isHidden = duration <= Config.VideoEditor.maximumDuration
+        if duration <= Config.VideoEditor.maximumDuration {
+            self?.infoLabel.text = "\(Int(duration.rounded(.down))) SECONDS"
+        }else{
+            self?.infoLabel.text = String(format: "Gallery.Videos.MaxiumDuration".g_localize(fallback: "FIRST %d SECONDS"),
+                                (Int(Config.VideoEditor.maximumDuration)))
+        }
     }
   }
 

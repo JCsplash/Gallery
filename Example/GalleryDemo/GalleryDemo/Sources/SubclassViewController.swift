@@ -8,7 +8,7 @@ class SubclassViewController: GalleryController, LightboxControllerDismissalDele
   
   override func viewDidLoad() {
 
-    //        Gallery.Config.VideoEditor.maximumDuration = 30.0
+    Gallery.Config.VideoEditor.maximumDuration = 30.0
     Gallery.Config.tabsToShow =  [.imageTab, .cameraTab, .videoTab]
     Gallery.Config.initialTab = .imageTab
     Gallery.Config.Camera.imageLimit = 20
