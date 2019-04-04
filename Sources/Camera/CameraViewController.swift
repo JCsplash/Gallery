@@ -56,6 +56,7 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     }
     
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didTake photo: UIImage) {
+        // TODO: Use Delegates | Parents: PagesController, GalleryController
         if let galleryVC = self.parent?.parent as? GalleryController {
             galleryVC.galleryDelegate?.galleryController(galleryVC, capturedPhoto: photo)
         }
@@ -119,7 +120,7 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     //MARK - CAMERA METHODS
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didFinishProcessVideoAt url: URL) {
         tmpVideoURLs.adding(url) //to be cleaned up later
-//        self.showAllButtons()
+        // TODO: Use Delegates | Parents: PagesController, GalleryController
         if let galleryVC = self.parent?.parent as? GalleryController {
             galleryVC.galleryDelegate?.galleryController(galleryVC, capturedVideo: url)
         }
