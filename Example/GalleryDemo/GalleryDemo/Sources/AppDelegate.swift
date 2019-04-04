@@ -11,14 +11,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return controller
     }()
 
-  lazy var viewController: SubclassViewController = {
-    let controller = SubclassViewController()
+  lazy var viewController: ViewController = {
+    let controller = ViewController()
     return controller
     }()
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     window = UIWindow(frame: UIScreen.main.bounds)
-    window?.rootViewController = viewController
+    window?.rootViewController = navigationController
     window?.makeKeyAndVisible()
     return true
   }

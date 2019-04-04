@@ -169,9 +169,10 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     func cancelButtonPressed(_ sender: Any) {
         EventHub.shared.close?()
     }
-
+    
     private func addButtons() {
-        let safeAreaTopSpace = CommonUtils.safeAreaInsets.top * 0.8
+        // TODO: Pin to SafeArea Layout Guides
+        let safeAreaTopSpace = CommonUtils.safeAreaInsets.top > 20 ? (CommonUtils.safeAreaInsets.top * 0.8) : 0
         let safeAreaBottomSpace = CommonUtils.safeAreaInsets.bottom * 0.6
         
         captureButton = SwiftyRecordButton(frame: CGRect(x: view.frame.midX - 37.5, y: view.frame.height - 110.0 - 25.0 - safeAreaBottomSpace, width: 75.0, height: 75.0))

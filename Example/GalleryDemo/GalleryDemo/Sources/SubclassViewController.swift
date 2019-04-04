@@ -26,6 +26,7 @@ class SubclassViewController: GalleryController, LightboxControllerDismissalDele
   
   func galleryControllerDidCancel(_ controller: GalleryController) {
     print("galleryControllerDidCancel Called")
+    self.dismiss(animated: true, completion: nil)
   }
   func galleryController(_ controller: GalleryController, didSelectMedia images: [Image], video: Video?) {
     print("didSelectMedia Called")
@@ -45,10 +46,21 @@ class SubclassViewController: GalleryController, LightboxControllerDismissalDele
   func galleryController(_ controller: GalleryController, capturedVideo videoURL: URL) {
     print("captureVideo Called")
   }
-//  override func viewWillAppear(_ animated: Bool) {
-//    super.viewWillAppear(animated)
-//    self.navigationController?.setNavigationBarHidden(true, animated: animated)
-//  }
+  var isPrefersStatusBarHidden:Bool = false
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return UIStatusBarAnimation.slide
+  }
+  override var prefersStatusBarHidden: Bool {
+    return isPrefersStatusBarHidden
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    isPrefersStatusBarHidden = true
+    UIView.animate(withDuration: 0.5) { () -> Void in
+      self.setNeedsStatusBarAppearanceUpdate()
+    }
+  }
+  
+  
 //
 //  override func viewWillDisappear(_ animated: Bool) {
 //    super.viewWillDisappear(animated)
