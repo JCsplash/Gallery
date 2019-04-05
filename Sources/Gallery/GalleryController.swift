@@ -17,7 +17,7 @@ public protocol GalleryControllerDelegate: class {
 open class GalleryController: UIViewController, PermissionControllerDelegate {
 
   lazy var imagesController: ImagesController = self.makeImagesController()
-  lazy var cameraController: CameraViewController = self.makeCameraController()
+  lazy var cameraController: CameraController = self.makeCameraController()
   lazy var videosController: VideosController = self.makeVideosController()
 
   lazy var pagesController: PagesController = self.makePagesController()
@@ -69,8 +69,8 @@ open class GalleryController: UIViewController, PermissionControllerDelegate {
     return controller
   }
 
-  func makeCameraController() -> CameraViewController {
-    let controller = CameraViewController()
+  func makeCameraController() -> CameraController {
+    let controller = CameraController()
     controller.title = "Gallery.Camera.Title".g_localize(fallback: "CAMERA")
 
     return controller

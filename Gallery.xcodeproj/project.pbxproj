@@ -23,7 +23,7 @@
 		A1D105517C585FA5CDE1E3F2 /* Pods_Gallery_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4F34E5451DF3FC00CD358E9 /* Pods_Gallery_iOS_Tests.framework */; };
 		D24CF7321E93D1FB002E6484 /* Gallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D24CF7311E93D1FB002E6484 /* Gallery.bundle */; };
 		D27B72ED1D6EEEC80093318F /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27B72EC1D6EEEC80093318F /* Tests.swift */; };
-		D27B72FD1D6EEED10093318F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27B72EF1D6EEED10093318F /* CameraController.swift */; };
+		D27B72FD1D6EEED10093318F /* CameraControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27B72EF1D6EEED10093318F /* CameraControllerOld.swift */; };
 		D27B72FE1D6EEED10093318F /* ImagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27B72F11D6EEED10093318F /* ImagesController.swift */; };
 		D27B730B1D6EEFDB0093318F /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27B730A1D6EEFDB0093318F /* GalleryController.swift */; };
 		D2E0215C1DAF6E2C00984B5A /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E021571DAF6E2C00984B5A /* Video.swift */; };
@@ -107,7 +107,7 @@
 		C4F34E5451DF3FC00CD358E9 /* Pods_Gallery_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gallery_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24CF7311E93D1FB002E6484 /* Gallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Gallery.bundle; sourceTree = "<group>"; };
 		D27B72EC1D6EEEC80093318F /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		D27B72EF1D6EEED10093318F /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		D27B72EF1D6EEED10093318F /* CameraControllerOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraControllerOld.swift; sourceTree = "<group>"; };
 		D27B72F11D6EEED10093318F /* ImagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesController.swift; sourceTree = "<group>"; };
 		D27B730A1D6EEFDB0093318F /* GalleryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
 		D27B730C1D6EF04D0093318F /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cartography.framework; path = Carthage/Build/iOS/Cartography.framework; sourceTree = "<group>"; };
@@ -217,6 +217,18 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		3AF1966922573CDE00F54A7A /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				D2E021AD1DAF6E4700984B5A /* CameraMan.swift */,
+				D2E021AE1DAF6E4700984B5A /* CameraView.swift */,
+				D2E021AF1DAF6E4700984B5A /* ShutterButton.swift */,
+				D2E021B11DAF6E4700984B5A /* TripleButton.swift */,
+				D27B72EF1D6EEED10093318F /* CameraControllerOld.swift */,
+			);
+			path = Unused;
+			sourceTree = "<group>";
+		};
 		9152178E1FD7024F545934F3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,12 +251,8 @@
 		D27B72EE1D6EEED10093318F /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				D2E021AD1DAF6E4700984B5A /* CameraMan.swift */,
-				D2E021AE1DAF6E4700984B5A /* CameraView.swift */,
-				D2E021AF1DAF6E4700984B5A /* ShutterButton.swift */,
+				3AF1966922573CDE00F54A7A /* Unused */,
 				D2E021B01DAF6E4700984B5A /* StackView.swift */,
-				D2E021B11DAF6E4700984B5A /* TripleButton.swift */,
-				D27B72EF1D6EEED10093318F /* CameraController.swift */,
 				3A10C9B02255023D00A0061D /* CameraViewController.swift */,
 			);
 			path = Camera;
@@ -609,7 +617,7 @@
 			files = (
 				D2E021A21DAF6E3B00984B5A /* GridView.swift in Sources */,
 				D2E021B81DAF70A800984B5A /* Constraints.swift in Sources */,
-				D27B72FD1D6EEED10093318F /* CameraController.swift in Sources */,
+				D27B72FD1D6EEED10093318F /* CameraControllerOld.swift in Sources */,
 				D2E021851DAF6E3B00984B5A /* Bundle.swift in Sources */,
 				D2E021B31DAF6E4700984B5A /* CameraView.swift in Sources */,
 				D2E0219F1DAF6E3B00984B5A /* ArrowButton.swift in Sources */,

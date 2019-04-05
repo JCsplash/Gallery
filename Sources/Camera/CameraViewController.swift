@@ -1,5 +1,5 @@
 //
-//  CameraViewController.swift
+//  CameraController.swift
 //  FlairTime
 //
 //  Created by Jack Chen on 7/4/17.
@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import AVKit
 
-class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDelegate {
+class CameraController: SwiftyCamViewController, SwiftyCamViewControllerDelegate {
     
     /*
      Todos:
